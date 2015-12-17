@@ -27,13 +27,13 @@
     <a href="/dashboard">Dashboard</a> |
     <a href="/logout">Logout</a>
     {% endif %}
-</font>
+</font><br>
 
 {% for post in list_of_posts %}
 <p>
 <table>
     <tr>
-        <th><b>{{ post.title }}</b> by {{ post.author }}</th>
+        <th><b><center>{{ post.title }}</b> by {{ post.author }}</center></th>
     </tr>
     <tr>
         <td>{{ post.post|safe }}<br>
@@ -46,10 +46,12 @@
     </tr>
     <tr>
         <th>
-            <font style="font-size:9pt">
-                <b>Category:</b> <a href="http://127.0.0.1:5000/category/{{ post.category }}">{{post.category}}</a> |
-                <b>Share:</b> <a href="http://127.0.0.1:5000/blogpost/{{ post.id }}">http://127.0.0.1:5000/blogpost/{{ post.id }}</a>
-            </font>
+            <center>
+                <font style="font-size:9pt">
+                    <b>Category:</b> <a href="http://127.0.0.1:5000/category/{{ post.category }}">{{post.category}}</a> |
+                    <b>Share:</b> <a href="http://127.0.0.1:5000/blogpost/{{ post.id }}">http://127.0.0.1:5000/blogpost/{{ post.id }}</a>
+                </font>
+            </center>
         </th>
     </tr>
 </table>
