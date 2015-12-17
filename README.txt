@@ -19,7 +19,8 @@ Post that one may have data freely flow from the database, to the controller, an
 to the view with any tests or changes being performed on the database.
 
 
-II. DIFFERENT ARRANGEMENTS OF POSTS (controllers: /, /dashboard, /blogpost, /category)
+II. DIFFERENT ARRANGEMENTS OF POSTS 
+    (controllers: /, /dashboard, /blogpost, /category)
 There are four controllers that work to establish different views and perspectives
 of the post stored in the database. For example, the / controller retrieves every
 single post that is marked to be published from the database. Information such as
@@ -42,7 +43,8 @@ contains options that allow users to update their own post where the other viewe
 not.
 
 
-III. LOGIN AND LOGOUT (controllers: /login, /logout)
+III. LOGIN AND LOGOUT 
+     (controllers: /login, /logout)
 The /login and /logout controllers work by manipulating the data in cookies through
 the session object available in Flask. /logout is an easy controller to manage as it
 only requires that the username entry be popped. The /login controller accepts user
@@ -52,7 +54,8 @@ this, a viewer is only necessary for /login as it needs this to accept user inpu
 /logout does not need user input or to display specific information.
 
 
-IV. INSERT INTO TABLE (controller: /post)
+IV. INSERT INTO TABLE 
+    (controller: /post)
 The /post controller is the only one that uses the "INSERT INTO TABLE" SQL statement
 in order to add new posts to the database from an HTML viewer where users may input
 information. The /post controller verifies that there is legitimate information that
@@ -65,7 +68,8 @@ author, and given id. Automatically, the published option is turned on. Its loca
 in the database allows other controllers to view it as needed.
 
 
-V. DELETE FROM TABLE (controller: /delete)
+V. DELETE FROM TABLE 
+   (controller: /delete)
 The /delete controller receives information in order to determine what entry in the
 database should be deleted. However, this information is not user inputted, rather it
 is hidden and embedded in a separate form that encompasses a button reachable on the
@@ -75,7 +79,8 @@ FROM" SQL statement to remove that entry from the database, eliminating it from 
 from any other controller.
 
 
-VI. UPDATE (controllers: /edit, /publish, /unpublish)
+VI. UPDATE 
+    (controllers: /edit, /publish, /unpublish)
 The /edit, /publish, and /unpublish controllers all interact in the same way with
 the database in that they utilize the "UPDATE" SQL statement. The /edit SQL statement
 takes in post title, post category, and the post itself as input in order replace pre-
@@ -124,3 +129,12 @@ will be sent back to their dashboard.html view. In both of these improper access
 instances, the user has an error message displayed to them. There is an optional
 parameter that allows this in the rtemplate() function and space on both dashboard.html
 and login.html views to display such messages.
+
+
+VIII. USERNAMES AND PASSWORDS
+Username        Password
+BarackObama     illinois
+GeorgeBush      texas
+BillClinton     arkansas
+RonaldReagan    california
+JimmyCarter     georgia
