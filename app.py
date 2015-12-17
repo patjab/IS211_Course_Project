@@ -9,6 +9,7 @@ import re
 
 __author__ = "Patrick Abejar"
 app = Flask(__name__)
+DATABASE = 'myblog.db'
 
 
 class Post:
@@ -49,7 +50,7 @@ def generate_list_of_posts(selection=""):
     """
 
     list_of_posts = []
-    conn = sqlite3.connect("myblog.db")
+    conn = sqlite3.connect(DATABASE)
 
     # Gets list for public view
     if selection == "":
@@ -143,7 +144,7 @@ def login():
     # Must check if credentials are not null, otherwise the boolean storage of
     # correct_credentials will throw an error
     if credentials_filled:
-        conn = sqlite3.connect("myblog.db")
+        conn = sqlite3.connect(DATABASE)
 
         # Retrieves password based on username and tests for match
         c = conn.execute('''SELECT password
@@ -206,7 +207,8 @@ def post():
 
     # Improper direct access will have the user redirected to the dashboard
     if len(request.form) == 0:
-        return rtemplate('dashboard.html', "ERROR: You must post from the dashboard.")
+        return rtemplate('dashboard.html', "ERROR: You must post from the "
+                                           "dashboard.")
 
     title = request.form['title']
     username = request.form['username']
@@ -224,7 +226,7 @@ def post():
     if re.search(pattern, refined_title) and \
             re.search(pattern, refined_category) and \
             re.search(pattern, refined_post):
-        conn = sqlite3.connect("myblog.db")
+        conn = sqlite3.connect(DATABASE)
 
         # Timestamp to be associated and displayed on posts
         now = time.strftime('%H:%M%p %Z on %b %d, %Y')
@@ -263,9 +265,10 @@ def delete():
 
     # Improper direct access will have the user redirected to the dashboard
     if len(request.form) == 0:
-        return rtemplate('dashboard.html', "ERROR: You must delete from the dashboard.")
+        return rtemplate('dashboard.html', "ERROR: You must delete from the "
+                                           "dashboard.")
 
-    conn = sqlite3.connect("myblog.db")
+    conn = sqlite3.connect(DATABASE)
     conn.execute('''DELETE FROM Posts WHERE id = %s''' % request.form['id'])
     conn.commit()
     conn.close()
@@ -300,7 +303,7 @@ def edit():
     # FIRST PART pulls data from database for post to be edited and that will
     # be sent back to the HTML template for editing
     if 'still_needs_input' in request.form:
-        conn = sqlite3.connect("myblog.db")
+        conn = sqlite3.connect(DATABASE)
         c = conn.execute('''SELECT * FROM Posts WHERE id = %s'''
                          % request.form['id']).fetchone()
         conn.commit()
@@ -335,7 +338,7 @@ def edit():
     if re.search(pattern, refined_title) \
             and re.search(pattern, refined_category) \
             and re.search(pattern, refined_post):
-        conn = sqlite3.connect("myblog.db")
+        conn = sqlite3.connect(DATABASE)
 
         # Edit is given a a new timestamp for the last_update to be displayed
         # along with the original date posted on the page of posts.
@@ -375,7 +378,7 @@ def publish():
 
     id = request.form['id']
 
-    conn = sqlite3.connect("myblog.db")
+    conn = sqlite3.connect(DATABASE)
     conn.execute('''UPDATE Posts
                     SET is_published='YES'
                     WHERE id='%s';''' % (id))
@@ -403,7 +406,7 @@ def unpublish():
 
     id = request.form['id']
 
-    conn = sqlite3.connect("myblog.db")
+    conn = sqlite3.connect(DATABASE)
     conn.execute('''UPDATE Posts
                     SET is_published='NO'
                     WHERE id='%s';''' % (id))
@@ -420,7 +423,7 @@ def blogpost(id):
     question, and gathers all the information from the database with reference
     to this ID. This will be displayed on an HTML template."""
 
-    conn = sqlite3.connect("myblog.db")
+    conn = sqlite3.connect(DATABASE)
     c = conn.execute('''SELECT * FROM Posts WHERE id = '%s';''' % id)
     post_contents = c.fetchone()
 
@@ -461,7 +464,7 @@ def category(category):
     database and retrieving only those posts in a list to be passed to an HTML
     template."""
 
-    conn = sqlite3.connect("myblog.db")
+    conn = sqlite3.connect(DATABASE)
     c = conn.execute('''SELECT *
                         FROM Posts
                         WHERE category='%s' AND is_published='YES'
