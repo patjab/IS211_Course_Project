@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>No Post - MyBlog</title>
+</head>
+<body>
+<div align="center">
+<font size="5"><b>MyBlog</b></font><br>
+
+<font size="2">
+    <b>User: </b>{{ username }} |
+    <a href="/">Public Posts</a> |
+    {% if not logged_in %}
+    <a href="/login">Login</a>
+    {% else %}
+    <a href="/dashboard">Dashboard</a> |
+    <a href="/logout">Logout</a>
+    {% endif %}
+</font><br><br>
+
+<i>No post with that specification exists</i>
+</div>
+</body>
+</html>

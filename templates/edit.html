@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>MyBlog Edit</title>
+</head>
+<body>
+<div align="center">
+<font size="5"><b>MyBlog Edit</b></font><br>
+<font size="2">
+    <b>User: </b>{{ username }} |
+    <a href="/dashboard">Dashboard</a> |
+    {% if not logged_in %}
+    <a href="/login">Login</a>
+    {% else %}
+    <a href="/logout">Logout</a>
+    {% endif %}
+</font><br><br>
+
+<font style="font-size:14pt"><b>Edit a Post</b></font>
+<form action="/edit" method="post">
+    Title: <input type="text" name="title" size="56" value="{{ title }}"><br>
+    Category: <input type="text" name="category" size="51" value="{{ category }}"><br>
+    <textarea rows="8" cols="60" name="post">{{ post }}</textarea><br>
+    <input type="hidden" name="id" value="{{ id }}">
+    <input type="Submit"> <input type="Reset" value="Start Over">
+</form><br>
+</div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Dashboard - MyBlog</title>
+</head>
+<body>
+<div align="center">
+<font size="5"><b>MyBlog Dashboard</b></font><br>
+
+<font size="2">
+    <b>User: </b>{{ username }} |
+    <a href="/">Public Posts</a> |
+    {% if not logged_in %}
+    <a href="/login">Login</a>
+    {% else %}
+    <a href="/logout">Logout</a>
+    {% endif %}
+</font><br><br>
+
+<font style="font-size:14pt"><b>Add a Post</b></font><br>
+<form action="/post" method="post">
+    Title: <input type="text" name="title" size="56" placeholder="What is the title of your post?"><br>
+    Category: <input type="text" name="category" size="51" placeholder="Enter a descriptive category"><br>
+    <textarea rows="8" cols="60" name="post" placeholder="What are you thinking? Enter your post here. HTML is allowed."></textarea><br>
+    <input type="hidden" name="username" value="{{ username }}">
+    <input type="Submit"> <input type="Reset" value="Start Over">
+</form><br>
+
+<font color="red">{{ status_message }}</font><br>
+
+{% if has_posts %}
+<table>
+    <tr><th colspan="4"><center>{{ username }}'s Control Panel</center></th></tr>
+{% for post in list_of_posts %}
+    <tr>
+        <td><a href="http://127.0.0.1:5000/blogpost/{{ post.id }}">{{ post.title }}</a></td>
+        <td>
+            <center>
+                <form action="/edit" method="post">
+                    <input type="hidden" name="id" value="{{ post.id }}">
+                    <input type="hidden" name="still_needs_input" value="true">
+                    <input type="Submit" value="Edit">
+                </form>
+            </center>
+        </td>
+        <td>
+            <center>
+                <form action="/delete" method="post">
+                    <input type="hidden" name="id" value="{{ post.id }}">
+                    <input type="Submit" value="Delete">
+                </form>
+            </center>
+        </td>
+        <td>
+            <center>
+                {% if post.is_published == "YES" %}
+                <form action="/unpublish" method="post">
+                    <input type="hidden" name="id" value="{{ post.id }}">
+                    <input type="Submit" value="Unpublish">
+                </form>
+                {% else %}
+                <form action="/publish" method="post">
+                    <input type="hidden" name="id" value="{{ post.id }}">
+                    <input type="Submit" value="Publish">
+                </form>
+                {% endif %}
+            </center>
+        </td>
+    </tr>
+{% endfor %}
+</table><br>
+{% else %}
+<i>No posts exist</i>
+{% endif %}
+</div>
+</body>
+</html>

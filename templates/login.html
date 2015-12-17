@@ -1,0 +1,24 @@
+<!-- Login page allowing for the taking in of information of username and password -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Log In</title>
+</head>
+<body>
+<div align="center">
+    <font size="5"><b>MyBlog Login</b></font><br>
+
+    <font size="2">
+    </font>
+
+    <form action="/login" method="post">
+        <p>Username: <input type="text" name="username"></p>
+        <p>Password: <input type="password" name="password"></p>
+        <input type="submit" value="Login"></form> <form action="/"><input type="submit" value="Continue as Guest"></form>
+
+    <p><font color='red'>{{ status_message }}</font></p>
+</div>
+</body>
+</html>

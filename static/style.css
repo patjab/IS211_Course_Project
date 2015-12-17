@@ -1,0 +1,68 @@
+        body {
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+        table {
+            width: 70%;
+            border-spacing: 0px;
+            border-collapse: collapse;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding: 1px;
+        }
+        th {
+            background-color: #142857;
+            color: #ffffff;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            text-align: left;
+            font-weight: normal;
+        }
+        td {
+            background-color: #0066ff;
+            color: #ffffff;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
+        }
+        a:link {
+            color: #66ff66;
+            text-decoration: none;
+        }
+        a:visited {
+            color: #66ff66;
+            text-decoration: none;
+        }
+        a:hover {
+            color: white;
+            text-decoration: none;
+        }
+        a:active {
+            color: #66ff66;
+            text-decoration: none;
+        }
+        input[type="submit"] {
+            background: #142857;
+            color: #ffffff;
+            border: none;
+            padding: 5px 20px;
+            cursor: pointer;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+        }
+        input[type="reset"] {
+            background: #142857;
+            color: #ffffff;
+            border: none;
+            padding: 5px 20px;
+            cursor: pointer;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+        }
+        .tb1 {
+            color: #000000;
+        }
+        form {
+            display:inline;
+            margin:0px;
+            padding:0px;
+        }

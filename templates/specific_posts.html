@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>{% if purpose == "category" %}
+        Category: {{ category }}
+        {% elif purpose == "blogpost" %}
+        {{ list_of_posts[0].title }}
+        {% endif %}
+         - MyBlog</title>
+</head>
+<body>
+<div align="center">
+<font size="5"><b>MyBlog - {% if purpose == "category" %}
+        Category: {{ category }}
+        {% elif purpose == "blogpost" %}
+        {{ list_of_posts[0].title }}
+        {% endif %}</b></font><br>
+
+<font size="2">
+    <b>User: </b>{{ username }} |
+    <a href="/">Public Posts</a> |
+    {% if not logged_in %}
+    <a href="/login">Login</a>
+    {% else %}
+    <a href="/dashboard">Dashboard</a> |
+    <a href="/logout">Logout</a>
+    {% endif %}
+</font>
+
+{% for post in list_of_posts %}
+<p>
+<table>
+    <tr>
+        <th><b>{{ post.title }}</b> by {{ post.author }}</th>
+    </tr>
+    <tr>
+        <td>{{ post.post|safe }}<br>
+            <div align="right"><font style="font-size:9pt">
+                {% if post.last_update != None %}
+                Last Updated: {{ post.last_update }}<br> Originally
+                {% endif %}
+                Posted on: {{ post.date }}</font></div>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <font style="font-size:9pt">
+                <b>Category:</b> <a href="http://127.0.0.1:5000/category/{{ post.category }}">{{post.category}}</a> |
+                <b>Share:</b> <a href="http://127.0.0.1:5000/blogpost/{{ post.id }}">http://127.0.0.1:5000/blogpost/{{ post.id }}</a>
+            </font>
+        </th>
+    </tr>
+</table>
+</p>
+{% endfor %}
+</div>
+</body>
+</html>

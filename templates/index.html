@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Public Posts - MyBlog</title>
+</head>
+<body>
+
+<div align="center">
+<font size="5"><b>MyBlog Posts</b></font><br>
+<font size="2">
+    <b>User:</b> {{ username }} |
+    {% if not logged_in %}
+    <a href="/login">Login</a>
+    {% else %}
+    <a href="/dashboard">Dashboard</a> |
+    <a href="/logout">Logout</a>
+    {% endif %}
+</font><br><br>
+
+{% if has_posts %}
+{% for post in list_of_posts %}
+<p>
+<table>
+    <tr>
+        <th><center><b>{{ post.title }}</b> by {{ post.author }}</center></th>
+    </tr>
+    <tr>
+        <td>{{ post.post|safe }}<br>
+            <div align="right"><font style="font-size:9pt">
+                {% if post.last_update != None %}
+                Last Updated: {{ post.last_update }}<br> Originally
+                {% endif %}
+                Posted on: {{ post.date }}</font></div>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <font style="font-size:9pt">
+                <center>
+                    <b>Category:</b> <a href="http://127.0.0.1:5000/category/{{ post.category }}">{{post.category}}</a> |
+                    <b>Share:</b> <a href="http://127.0.0.1:5000/blogpost/{{ post.id }}">http://127.0.0.1:5000/blogpost/{{ post.id }}</a>
+                </center>
+            </font>
+        </th>
+    </tr>
+</table>
+</p>
+    <br>
+{% endfor %}
+{% else %}
+<i>No posts exists</i>
+{% endif %}
+</div>
+</body>
+</html>
