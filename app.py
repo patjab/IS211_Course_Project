@@ -9,6 +9,7 @@ import re
 
 __author__ = "Patrick Abejar"
 app = Flask(__name__)
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 DATABASE = 'myblog.db'
 
 
@@ -516,5 +517,4 @@ def logout():
 
 if __name__ == "__main__":
     # RUNS ON PORT 5000 ON 127.0.0.1, SINCE PORT 80 REQUIRES SUDO
-    app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
     app.run()
